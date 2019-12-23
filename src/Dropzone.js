@@ -5,8 +5,6 @@ import { useDropzone } from 'react-dropzone';
 const Dropzone = ({ onDrop, accept }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept });
 
-  console.log('debug cxi', 'getInputProps()', getInputProps());
-
   return (
     <div className={getClassName("dropzone", isDragActive)} {...getRootProps()}>
       <input className="dropzone-input" {...getInputProps()} />
