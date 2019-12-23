@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import cuid from 'cuid';
+// import cuid from 'cuid';
 import './App.css';
 import Dropzone from './Dropzone';
 import ImageList from './ImageList';
@@ -15,7 +15,8 @@ function App() {
       reader.onload = function(e) {
         setImages(prevState => [
           ...prevState,
-          { id: cuid(), src: e.target.result }
+          // 这里我们用文件名作为 id，请确保文件名唯一
+          { id: file.name, src: e.target.result }
         ]);
       };
       reader.readAsDataURL(file);

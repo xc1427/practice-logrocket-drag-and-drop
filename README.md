@@ -8,6 +8,8 @@ https://blog.logrocket.com/drag-and-drop-in-react/
 
 我们不加这句话 ，拿两个 image 做实验。我们在两个地方插入 console.log, 看输出的结果
 
+![final_app_look.jpg](./doc/final_app_look.jpg)
+
 
 
 ### ImageList 渲染的时候
@@ -27,14 +29,14 @@ const renderImage = (image, index) => {
 ```
 
 ```
-debug cxi image.id , index: ck4hro3wt00013g5tuwq5e100 0
-debug cxi image.id , index: ck4hro3wd00003g5tje25dedf 1
+debug cxi image.id , index: dog.jpg 0
+debug cxi image.id , index: dog2.jpeg 1
 
-debug cxi image.id , index: ck4hro3wd00003g5tje25dedf 0
-debug cxi image.id , index: ck4hro3wt00013g5tuwq5e100 1
+debug cxi image.id , index: dog2.jpeg 0
+debug cxi image.id , index: dog.jpg 1
 
-debug cxi image.id , index: ck4hro3wt00013g5tuwq5e100 0
-debug cxi image.id , index: ck4hro3wd00003g5tje25dedf 1
+debug cxi image.id , index: dog.jpg 0
+debug cxi image.id , index: dog2.jpeg 1
 ```
 
 当移动后，触发了 react 的 re-render，因为移动了所以各个 image 的顺序是切实发生了变化，这个变化是 id 的顺序的变化。
@@ -66,14 +68,14 @@ hover(item) {  // item is the dragged element
 }
 ```
 ```
-debug cxi dragIndex-id vs hoverIndex-id: 0-ck4hsa90d00003g5rvg9viko8 1-ck4hsa90m00013g5r7ghejagu
-debug cxi dragIndex-id vs hoverIndex-id: 0-ck4hsa90d00003g5rvg9viko8 1-ck4hsa90d00003g5rvg9viko8
-debug cxi dragIndex-id vs hoverIndex-id: 0-ck4hsa90d00003g5rvg9viko8 1-ck4hsa90m00013g5r7ghejagu
-debug cxi dragIndex-id vs hoverIndex-id: 0-ck4hsa90d00003g5rvg9viko8 1-ck4hsa90d00003g5rvg9viko8
-debug cxi dragIndex-id vs hoverIndex-id: 0-ck4hsa90d00003g5rvg9viko8 1-ck4hsa90m00013g5r7ghejagu
-debug cxi dragIndex-id vs hoverIndex-id: 0-ck4hsa90d00003g5rvg9viko8 1-ck4hsa90d00003g5rvg9viko8
-debug cxi dragIndex-id vs hoverIndex-id: 0-ck4hsa90d00003g5rvg9viko8 1-ck4hsa90m00013g5r7ghejagu
-debug cxi dragIndex-id vs hoverIndex-id: 0-ck4hsa90d00003g5rvg9viko8 1-ck4hsa90d00003g5rvg9viko8
+debug cxi dragIndex-id vs hoverIndex-id: 0-dog.jpg 1-dog2.jpeg
+
+debug cxi dragIndex-id vs hoverIndex-id: 0-dog.jpg 1-dog.jpg
+
+debug cxi dragIndex-id vs hoverIndex-id: 0-dog.jpg 1-dog2.jpeg
+
+debug cxi dragIndex-id vs hoverIndex-id: 0-dog.jpg 1-dog.jpg
+
 ```
 
 hover 回调的时候，drag 的 id 是不变，是容易理解的，因为虽然做了 move 的操作，被 drag 的那个 React 组件没有被销毁，（提醒一个事实：`hover(item) { }` 被调用的对象是被 hover 的那个组件）无论它 hover 到谁头上，都一直是这个 React 组件被 drag，应该是由于 hook 中闭包的原理，被 drag 的组件的 index 并未改变。
